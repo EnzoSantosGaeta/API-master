@@ -1,40 +1,39 @@
 import { conection } from "./conection.js";
 
 
-export async function listarJogos() {
+export async function listarEstado() {
   const comando = `
     SELECT *
-      FROM jogos
+      FROM estados
   `
 
   const [registros] = await conection.query(comando)
   return registros;
 }
 
-export async function inserirJogos(jogo) {
-  const comando = `
-    INSERT INTO jogos (nome, genero, plataforma, ano_lancamento)
-    VALUES (?, ?, ?, ?);
-  `;
+export async function inserirEstado(Estado) {
+const comando = `
+  INSERT INTO estados (nome, sigla)
+  VALUES (?, ?)
+`;
+
 
   const [info] = await conection.query(comando, [
-    jogo.nome,
-    jogo.genero,
-    jogo.plataforma,
-    jogo.ano_lancamento,
+    Estado.nome,
+    Estado.sigla,
   ]);
 
   return info.insertId;
 }
 
-export async function deletarJogos(Jogo) {
+export async function deletarEstado(estado) {
   const comando = `
-    DELETE FROM jogos
+    DELETE FROM estados
     WHERE id = ?
   `;
 
   const [deleted] = await conection.query(comando, [
-    Jogo.id
+    estado.id
   ]);
 
   return deleted.affectedRows;

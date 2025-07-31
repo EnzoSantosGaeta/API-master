@@ -38,5 +38,5 @@ export async function deletarFilme(filme) {
     filme.id
   ]);
 
-  return deleted.deleteId;
+  return deleted.affectedRows;
 }
