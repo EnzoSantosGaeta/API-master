@@ -6,9 +6,17 @@ import { deletarEstado, inserirEstado, listarEstado } from './estadosRepository.
 
 import { inserirFilme, listarFilmes, deletarFilme } from './filmesRepository.js';
 
+import { deletarFuncionario, inserirFuncionario, listarFuncionario } from './funcionariosRepository.js';
+
 import { listarJogos, deletarJogos, inserirJogos } from './jogosRepository.js';
 
+import { deletarPizza, inserirPizza, listarPizza } from './pizzasRepository.js';
+
+import { deletarRoupas, listarRoupas, inserirRoupas } from './roupasRepository.js';
+
 import { listarStream, deletarStream, inserirStream } from './streamsRepository.js';
+
+import {listarCarros, deletarCarros, inserirCarros} from './carrosRepository.js'
 
 import express from 'express'
 const api = express();
@@ -138,6 +146,90 @@ api.delete('/Desenhos', async (req, resp) => {
   let DeleteDesenho = req.body;
 
   let sucesso = await deletarDesenhos(DeleteDesenho);
+  resp.send({ apagado: sucesso });
+})
+
+//roupas
+
+api.get('/Roupas', async (req, resp) => {
+  let registros = await listarRoupas();
+  resp.send(registros);
+})
+
+api.post('/Roupas', async (req, resp) => {
+  let NewRoupas = req.body;
+
+  let id = await inserirRoupas(NewRoupas);
+  resp.send({ novoId: id });
+})
+
+api.delete('/Roupas', async (req, resp) => {
+  let DeleteRoupas = req.body;
+
+  let sucesso = await deletarRoupas(DeleteRoupas);
+  resp.send({ apagado: sucesso });
+})
+
+//pizzas
+
+api.get('/Pizza', async (req, resp) => {
+  let registros = await listarPizza();
+  resp.send(registros);
+})
+
+api.post('/Pizza', async (req, resp) => {
+  let NewPizza = req.body;
+
+  let id = await inserirPizza(NewPizza);
+  resp.send({ novoId: id });
+})
+
+api.delete('/Pizza', async (req, resp) => {
+  let DeletePizza = req.body;
+
+  let sucesso = await deletarPizza(DeletePizza);
+  resp.send({ apagado: sucesso });
+})
+
+//funcionarios
+
+api.get('/Funcionario', async (req, resp) => {
+  let registros = await listarFuncionario();
+  resp.send(registros);
+})
+
+api.post('/Funcionario', async (req, resp) => {
+  let NewFuncionario = req.body;
+
+  let id = await inserirFuncionario(NewFuncionario);
+  resp.send({ novoId: id });
+})
+
+api.delete('/Funcionario', async (req, resp) => {
+  let DeleteFuncionario = req.body;
+
+  let sucesso = await deletarFuncionario(DeleteFuncionario);
+  resp.send({ apagado: sucesso });
+})
+
+//carros
+
+api.get('/Carros', async (req, resp) => {
+  let registros = await listarCarros();
+  resp.send(registros);
+})
+
+api.post('/Carros', async (req, resp) => {
+  let NewCarros = req.body;
+
+  let id = await inserirCarros(NewCarros);
+  resp.send({ novoId: id });
+})
+
+api.delete('/Carros', async (req, resp) => {
+  let DeleteCarros = req.body;
+
+  let sucesso = await deletarCarros(DeleteCarros);
   resp.send({ apagado: sucesso });
 })
 
